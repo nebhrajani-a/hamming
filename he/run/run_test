@@ -1,0 +1,28 @@
+#!/usr/bin/env -S python3 -B
+
+import sys
+import os
+
+if __name__ == "__main__":
+    sys.path.insert(0, '../scripts/src')
+    import run_lib as rl
+
+    args = rl.argument_parser('Run a single test.')
+    tests = os.popen("ls ../tests | sort -V").read().splitlines()
+    test = args.test_name + ".v"
+    directory = "./"
+    s = set()
+    if test not in tests:
+        print("Test not found.")
+        sys.exit(1)
+    if "rand" in test:
+        if "range" in test:
+            test_name = rl.make_heredoc(test, s, gen_heredoc_k=True)
+            rl.run(directory, test, test_name, args)
+        else:
+            rl.make_heredoc(test, s, gen_heredoc_k=False)
+            rl.run(directory, test, test[:-2], args)
+    else:
+        rl.run(directory, test, test[:-2], args)
+
+    rl.check_and_rm(["a.out", "he_rand_heredoc.v"])

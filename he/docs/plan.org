@@ -1,0 +1,142 @@
+#+title: Planning Document
+#+subtitle: Hamming Error Correction Module
+#+author: Kamath O., Nebhrajani A. V.
+#+options: toc:nil
+#+LATEX_HEADER: \usepackage{parskip}
+#+LATEX_HEADER: \usepackage{xcolor}
+
+Assignee map:\\
+*A: Aditya*\\
+*B: Omkar*
+
+Color codes:\\
+\colorbox{green}{Green}: Completed.\\
+\colorbox{pink}{Light red}: Slipped, but plan to catch up exists.\\
+\colorbox{red}{Red}: Slipped, no further information.\\
+\colorbox{yellow}{Yellow}: Requires Vijay uncle's time. Is always
+paired with a date *and* time to meet.\\
+
+#+LATEX: \newpage
+
+* Specification
+
+** Theory
+*Prerequisites:* Basic linear algebra, group theory.\\
+*Assignee:* A.\\
+*Process:* Study theory from Error Control Coding (Lin), use relevant
+parts on linear and Hamming codes to write theory section.\\
+*Finish condition:* Section written and
+review passed.\\
+*Deadline:* \colorbox{green}{<2022-06-11 Sat>}\\
+*Completed:* \colorbox{green}{<2022-06-11 Sat>}\\
+
+** Interface
+*Prerequisites:* Understanding of I/O interface of Hamming module.\\
+*Assignee:* B.\\
+*Process:* Figure out how to "read" data stream to encode; latency
+and clock frequency required.\\
+*Finish condition:* Section written and review passed.\\
+*Deadline:* \colorbox{pink}{<2022-06-12 Sun>}\\
+*Completed:* \colorbox{green}{<2022-06-16 Thu>}\\
+
+*** Timing Diagrams
+*Prerequisites:* Understanding expected behavior of Hamming module.\\
+*Assignee:* ?\\
+*Process:* Making timing diagrams for expected inputs to Hamming module.\\
+*Finish condition:* Section written and review passed.\\
+*Deadline:* \colorbox{pink}{<2022-06-12 Sun>}\\
+
+** Review
+*Prerequisites:* Specification is in a complete state.\\
+*Assignee:* With Vijay uncle.\\
+*Process:* Review spec, correct errors.\\
+*Finish condition:* Spec passes all reviews.\\
+*Deadline:* \colorbox{pink}{<2022-06-12 Sun>}\\
+*Completed:* \colorbox{green}{<2022-06-17 Fri>}
+
+* Paper Design
+
+** Encoder
+*Prerequisite:* Specification complete.\\
+*Assignee:* A\\
+*Process:* Make paper design of functions and FSMs used to implement
+parameterized Hamming encoder.\\
+*Finish condition:* Ready to write RTL, encoder matches specification.\\
+*Deadline:* \colorbox{green}{<2022-06-13 Mon>}\\
+*Completed:* \colorbox{green}{<2022-06-13 Mon>}\\
+
+** Decoder
+*Prerequisite:* Specification complete.\\
+*Assignee:* B\\
+*Process:* Make paper design of functions and FSMs used to implement
+parameterized Hamming decoder.\\
+*Finish condition:* Ready to write RTL, decoder matches specification.\\
+*Deadline:* \colorbox{pink}{<2022-06-19 Sun>}\\
+
+* RTL
+
+** Encoder
+*Prerequisite:* Paper design of encoder complete.\\
+*Assignee:* A\\
+*Process:* Write Verilog for the paper design, make sure specification
+is matched.\\
+*Finish condition:* RTL passes basic "manual" testing.\\
+*Deadline:* \colorbox{pink}{<2022-06-14 Tue>}\\
+*Completed:* \colorbox{green}{<2022-06-15 Wed>}\\
+
+** Decoder
+*Prerequisite:* Paper design of decoder complete.\\
+*Assignee:* B\\
+*Process:* Write Verilog for the paper design, make sure specification
+is matched.\\
+*Finish condition:* RTL passes basic "manual" testing.\\
+*Deadline:* \colorbox{pink}{<2022-06-19 Sun>}\\
+
+** Code Review for RTL
+*Prerequisite:* RTL complete.\\
+*Assignee:* With Vijay uncle\\
+*Process:* Make sure Verilog is correct, synthesizable, and follows
+coding guidelines.\\
+*Finish condition:* Passes review.\\
+*Deadline:* \colorbox{yellow}{<2022-06-20 Mon 19:00>}\\
+
+
+
+* Testing
+
+** Testing Theory
+*Prerequisite:* None.\\
+*Assignee:* With Vijay uncle\\
+*Process:* Learn verification environments, test plans, tests,
+verification reviews. \\
+*Deadline:* \colorbox{yellow}{<2022-06-19 Sun 14:00>}\\
+
+** Testing Plan
+*Prerequisite:* Learn how to write tests.\\
+*Assignee:* ?\\
+*Process:* Create testing plan for RTL.\\
+*Finish condition:* Tests ready to write.\\
+*Deadline:* \colorbox{red}{<2022-06-15 Wed>}\\
+
+** Encoder
+*Prerequisite:* Encoder RTL complete.\\
+*Assignee:* A\\
+*Process:* Write a testbench for Hamming encoder, make sure written
+module passes all tests (directed and randomized).\\
+*Finish condition:* Passes all tests.\\
+*Deadline:* \colorbox{pink}{<2022-06-18 Sat>}\\
+
+** Decoder
+*Prerequisite:* Decoder RTL complete.\\
+*Assignee:* B\\
+*Process:* Write a testbench for Hamming decoder, make sure written
+module passes all tests (directed and randomized).\\
+*Finish condition:* Passes all tests.\\
+*Deadline:* \colorbox{pink}{<2022-06-18 Sat>}\\
+
+* Review
+*Prerequisites:* Module built, passing all tests.\\
+*Assignee:* With Vijay uncle.\\
+*Process:* Review all work, make changes as required.\\
+*Finish condition:* Passes review.\\
+*Deadline:* \colorbox{yellow}{<2022-06-20 Mon 19:00>}\\

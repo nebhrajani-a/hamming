@@ -1,0 +1,30 @@
+#!/usr/bin/env -S python3 -B
+
+import sys
+import os
+
+if __name__ == "__main__":
+    sys.path.insert(0, '../scripts/src')
+    import run_lib as rl
+
+    args = rl.argument_parser('Run the entire regression suite.')
+    tests = os.popen("ls ../tests | sort -V").read().splitlines()
+    iters_prev = 1
+    iters = 2
+
+    directory = rl.make_log_dir()
+
+    for test in tests:
+        rl.make_noisy_heredoc()
+        s = set()
+        if "rand" in test:
+            if "range" in test:
+                for i in range(iters):
+                    test_name = rl.make_heredoc(test, s, gen_heredoc_k=True)
+                    rl.run(directory, test, test_name, args)
+                iters_prev, iters = iters, iters_prev + iters
+            else:
+                rl.make_heredoc(test, s, gen_heredoc_k=False)
+                rl.run(directory, test, test[:-2], args)
+
+        rl.check_and_rm(["a.out", "hd_rand_heredoc.v"])

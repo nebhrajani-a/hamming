@@ -1,0 +1,27 @@
+#+options: toc:nil
+
+# dumpvars, debug control with `ifdef
+# log file $fdisplay
+# error message format
+# make all the files.
+1. Exhaustive
+   - Every $k=[4,16]$ bit pattern sent through encoder and verified.
+     For each $k$, $2^k$ unique patterns are sent.
+
+2. Random
+   1. For a random $k$ (=$random($now)=), split into 6 ranges:
+      - $k \in [17,31]$
+      - $k \in [33, 63]$
+      - $k \in [65, 127]$
+      - $k \in [128, 255]$
+      - $k \in [256, 511]$
+      - $k \in [512, 1024]$
+      Run 2, 3, 5, 8, 13, 21 times respectively.
+
+   2. Always do random 32, 64.
+
+3. Memory-style tests
+   1. Walking 0: Same 6 ranges, pick a random $k$ from each range.
+      Exhaustive walking 0.
+   2. Walking 1: Same 6 ranges, pick a random $k$ from each range.
+      Exhaustive walking 1.

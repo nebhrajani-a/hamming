@@ -1,0 +1,93 @@
+#!/usr/bin/env -S python3 -B
+
+import os
+import sys
+import random
+
+
+def write_msg_to_file(msg_as_hex_list, filename):
+    with open(filename, "w") as fp:
+        fp.write('\n'.join(msg_as_hex_list))
+
+
+def write_heredoc(msg):
+    with open("h_demo_params.v", "w") as fp:
+        fp.write("localparam LEN = " + str(len(msg)) + ";")
+
+
+def hamming_to_char(hamming_str):
+    return chr(int(hamming_str[-7:], 2))
+
+
+def flip_ascii_char(s):
+    s = list(s)[::-1]
+    idx = random.randint(0, 6)
+    # idx = 3
+    s[idx] = str(int(s[idx]) ^ 1)
+    s = ''.join(s[::-1])
+    return s
+
+
+def read_encoder_output():
+    with open("encoder_output.txt", "r") as fptr:
+        return list(map(lambda f: f.zfill(11), fptr.read().splitlines()))
+
+
+def read_decoder_output():
+    with open("decoder_output.txt", "r") as fptr:
+        return ''.join(map(lambda x: chr(int(x, 2)), fptr.read().splitlines()))
+
+
+def main():
+    sys.path.insert(0, '../scripts/src')
+    import run_lib as rl
+
+    # get the string
+    msg = input("Input string: ")
+    print("")
+    write_heredoc(msg)
+
+    # write input test vector for encoder
+    msg_as_hex_list = list(map(lambda f: hex(ord(f))[2:].zfill(2), msg))
+    write_msg_to_file(msg_as_hex_list, "enc_test_vectors.txt")
+
+    # run the encoder
+    os.system('iverilog he_demo.v ../rtl/he_top.v\
+    ../sim/he_clk_rst_ctrl.v ../sim/he_data_gen.v\
+    ../rtl/he_parity_gen.v && ./a.out')
+
+    # make sure encoder output is correct
+    enc = read_encoder_output()
+    enc_verify = ''.join(map(hamming_to_char, enc))
+    assert (enc_verify == msg)
+    print("Encoder output:", enc_verify, "\n")
+
+    rl.check_and_rm(["a.out", "enc_test_vectors.txt", "encoder_output.txt"])
+
+    # pass through noisy channel and print output
+    noise = list(map(flip_ascii_char, enc))
+
+    # WARNING! might break terminal!
+    print("Noisy channel output:", ''.join(map(hamming_to_char, noise)), "\n")
+
+    # decoder input test vectors
+    noise_as_hex_list = list(map(lambda f: hex(int(f, 2))[2:].zfill(3), noise))
+    write_msg_to_file(noise_as_hex_list, "dec_test_vectors.txt")
+
+    # use arguments to enable/disable encoder, channel, decoder?
+
+    # run the decoder
+    os.system('iverilog -g2005-sv hd_demo.v ../sim/he_clk_rst_ctrl.v\
+    ../../hd/rtl/hd_top.v ../rtl/he_parity_gen.v && ./a.out')
+
+    decoder_out = read_decoder_output()
+    assert (decoder_out == msg)
+    print("Decoder output:", decoder_out)
+    rl.check_and_rm([
+        "a.out", "dec_test_vectors.txt", "decoder_output.txt",
+        "h_demo_params.v"
+    ])
+
+
+if __name__ == "__main__":
+    main()

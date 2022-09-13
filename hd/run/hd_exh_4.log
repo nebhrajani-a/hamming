@@ -1,0 +1,16 @@
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 11500, expected 0000, got 0010
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 12500, expected 0001, got 0110
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 13500, expected 0010, got 0000
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 14500, expected 0011, got 0111
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 15500, expected 0100, got 1101
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 16500, expected 0101, got 0100
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 17500, expected 0110, got 0100
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 18500, expected 0111, got 0000
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 19500, expected 1000, got 1010
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 20500, expected 1001, got 1000
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 21500, expected 1010, got 1110
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 22500, expected 1011, got 0111
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 23500, expected 1100, got 0101
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 24500, expected 1101, got 0100
+Error: In hd_exh_4.u1_hd_simenv.u4_data_chk.candr, at time 26500, expected 1111, got 1101
+Error count:          15

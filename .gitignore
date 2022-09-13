@@ -1,0 +1,6 @@
+.DS_Store*
+a.out
+*.vcd
+*~
+he/run/run-20*
+hd/run/run-20*
